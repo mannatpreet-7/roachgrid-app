@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culture — RoachGrid</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav__brand"><span class="nav__brand-mark">R</span> RoachGrid</a>
+  <ul class="nav__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="explore.html">Explore</a></li>
+    <li><a href="culture.html" aria-current="page">Culture</a></li>
+    <li><a href="updates.html">Updates</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+  <button class="nav__menu-btn" data-menu-toggle aria-label="Menu">☰</button>
+</nav>
+
+<header class="hero" style="padding-bottom:1rem;">
+  <div class="hero__block hero__block--teal" aria-hidden="true"></div>
+  <div class="container hero__content">
+    <p class="eyebrow">Culture &amp; identity</p>
+    <h1 data-ghost-text>Beyond the landmarks.</h1>
+    <p>Language, festivals, and everyday lifestyle — the things that actually shape a place.</p>
+  </div>
+</header>
+
+<main class="container">
+  <div class="tabs" role="tablist" aria-label="Culture sections">
+    <button class="tab" role="tab" aria-selected="true" data-tab="language">Language</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="festivals">Festivals</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="lifestyle">Lifestyle</button>
+  </div>
+
+  <section class="tab-panel is-active" id="panel-language" data-tab-panel="language">
+    <p class="text-muted" id="language-intro"></p>
+
+    <h3 style="font-size:var(--fs-lg); margin-top:1.5rem;">Languages spoken here</h3>
+    <div class="grid" id="languages-spoken-list" style="margin-top:1rem;"></div>
+
+    <h3 style="font-size:var(--fs-lg); margin-top:2rem;" id="language-phrases-heading">Common phrases</h3>
+    <p class="text-muted" id="language-phrases-intro" style="margin-top:0.25rem;"></p>
+    <div class="grid" id="language-list" style="margin-top:1rem;"></div>
+  </section>
+
+  <section class="tab-panel" id="panel-festivals" data-tab-panel="festivals">
+    <p class="text-muted" id="festivals-intro"></p>
+    <div class="grid" id="festivals-list" style="margin-top:1.5rem;"></div>
+  </section>
+
+  <section class="tab-panel" id="panel-lifestyle" data-tab-panel="lifestyle">
+    <p class="text-muted" id="lifestyle-intro"></p>
+    <ul id="lifestyle-list" style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.75rem;"></ul>
+  </section>
+</main>
+
+<script type="module" src="js/main.js"></script>
+<script type="module">
+  import { initScrollReveal } from "./js/modules/uiEffects.js";
+  import { createEl } from "./js/utils/dom.js";
+
+  async function loadCulture() {
+    const res = await fetch("data/culture.json");
+    const data = await res.json();
+
+    document.getElementById("language-intro").textContent = data.language.intro;
+    document.getElementById("language-phrases-intro").textContent = data.language.phrasesIntro;
+
+    const spokenList = document.getElementById("languages-spoken-list");
+    const langCards = [];
+
+    function renderPhrasesFor(lang) {
+      document.getElementById("language-phrases-heading").textContent = `Common phrases — ${lang.name}`;
+      const langList = document.getElementById("language-list");
+      langList.innerHTML = "";
+      lang.phrases.forEach((p) => {
+        const card = createEl("div", { className: "card", attrs: { "data-reveal": "" } });
+        const body = createEl("div", { className: "card__body" });
+        body.appendChild(createEl("div", { className: "card__title", text: p.local }));
+        body.appendChild(createEl("div", { className: "text-muted", text: `${p.phrase} · "${p.pronunciation}"`, attrs: { style: "margin-top:0.25rem;" } }));
+        card.appendChild(body);
+        langList.appendChild(card);
+      });
+      initScrollReveal();
+    }
+
+    function selectLanguage(lang, cardEl) {
+      langCards.forEach(({ el }) => el.classList.remove("card--selected"));
+      cardEl.classList.add("card--selected");
+      renderPhrasesFor(lang);
+    }
+
+    data.language.spoken.forEach((lang, i) => {
+      const card = createEl("button", {
+        className: "card language-card",
+        attrs: { "data-reveal": "", type: "button", "aria-pressed": i === 0 ? "true" : "false" },
+      });
+      const body = createEl("div", { className: "card__body" });
+      body.appendChild(createEl("span", { className: "eyebrow", text: lang.role }));
+      body.appendChild(createEl("div", { className: "card__title", text: lang.name, attrs: { style: "margin-top:0.4rem;" } }));
+      body.appendChild(createEl("div", { className: "text-muted", text: lang.note, attrs: { style: "margin-top:0.25rem;" } }));
+      body.appendChild(createEl("div", { className: "language-card__hint text-muted", text: "Tap to see phrases →" }));
+      card.appendChild(body);
+      card.addEventListener("click", () => {
+        langCards.forEach(({ el }) => el.setAttribute("aria-pressed", "false"));
+        card.setAttribute("aria-pressed", "true");
+        selectLanguage(lang, card);
+      });
+      spokenList.appendChild(card);
+      langCards.push({ lang, el: card });
+    });
+
+    // Default to the first language's phrases
+    if (langCards.length) {
+      langCards[0].el.classList.add("card--selected");
+      renderPhrasesFor(langCards[0].lang);
+    }
+
+    document.getElementById("festivals-intro").textContent = data.festivals.intro;
+    const festList = document.getElementById("festivals-list");
+    data.festivals.items.forEach((f) => {
+      const card = createEl("div", { className: "card", attrs: { "data-reveal": "" } });
+      const body = createEl("div", { className: "card__body" });
+      body.appendChild(createEl("span", { className: "badge badge--event", text: f.season }));
+      body.appendChild(createEl("div", { className: "card__title", text: f.name, attrs: { style: "margin-top:0.5rem;" } }));
+      body.appendChild(createEl("div", { className: "text-muted", text: f.description, attrs: { style: "margin-top:0.25rem;" } }));
+      card.appendChild(body);
+      festList.appendChild(card);
+    });
+
+    document.getElementById("lifestyle-intro").textContent = data.lifestyle.intro;
+    const lifestyleList = document.getElementById("lifestyle-list");
+    data.lifestyle.notes.forEach((note) => {
+      const li = createEl("li", { className: "card", attrs: { "data-reveal": "" } });
+      const body = createEl("div", { className: "card__body", text: note });
+      li.appendChild(body);
+      lifestyleList.appendChild(li);
+    });
+
+    initScrollReveal(); // re-run for dynamically injected cards
+  }
+
+  function initTabs() {
+    const tabs = document.querySelectorAll(".tab");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.setAttribute("aria-selected", "false"));
+        tab.setAttribute("aria-selected", "true");
+
+        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("is-active"));
+        document.getElementById(`panel-${tab.dataset.tab}`).classList.add("is-active");
+      });
+    });
+  }
+
+  initTabs();
+  loadCulture();
+</script>
+</body>
+</html>

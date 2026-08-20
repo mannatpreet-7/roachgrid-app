@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="RcLoy5J21jGmkTN-_w1ji3d4AWww8Id5bNZiqbQ0MVA" />
+<title>RoachGrid — Know every corner</title>
+<meta name="description" content="A hyperlocal awareness and discovery platform: explore places, culture, and live civic updates around you.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav__brand">
+    <span class="nav__brand-mark">R</span> RoachGrid
+  </a>
+  <ul class="nav__links">
+    <li><a href="index.html" aria-current="page">Home</a></li>
+    <li><a href="explore.html">Explore</a></li>
+    <li><a href="culture.html">Culture</a></li>
+    <li><a href="updates.html">Updates</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+  <button class="nav__menu-btn" data-menu-toggle aria-label="Menu">☰</button>
+</nav>
+
+<header class="hero">
+  <div class="hero__block hero__block--teal" aria-hidden="true"></div>
+  <div class="hero__block hero__block--amber" aria-hidden="true"></div>
+  <div class="container hero__content">
+    <p class="eyebrow">Hyperlocal awareness &amp; discovery</p>
+    <h1 data-ghost-text>Know every corner you stand in.</h1>
+    <p>Restaurants, culture, weather, and what's actually happening nearby — one grid, no app-switching.</p>
+    <div class="hero__actions">
+      <a href="explore.html" class="btn btn--primary">Start exploring</a>
+      <a href="culture.html" class="btn btn--secondary">Learn the culture</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="section">
+    <div class="section__header" data-reveal>
+      <p class="eyebrow">What's inside</p>
+      <h2>Everything about a place, in one grid</h2>
+      <p>Instead of five apps for five kinds of local knowledge, RoachGrid brings discovery, culture, and civic awareness together.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card" data-reveal>
+        <div class="card__body">
+          <div class="badge badge--food" style="margin-bottom:0.5rem;">Discover</div>
+          <h3 class="card__title">Explore nearby</h3>
+          <p class="text-muted" style="margin-top:0.5rem;">Restaurants, cafés, street food, attractions, hospitals and more — filtered by a radius you control.</p>
+        </div>
+      </div>
+      <div class="card" data-reveal>
+        <div class="card__body">
+          <div class="badge badge--civic" style="margin-bottom:0.5rem;">Understand</div>
+          <h3 class="card__title">Local culture</h3>
+          <p class="text-muted" style="margin-top:0.5rem;">Language basics, festivals, history, and everyday lifestyle — the identity behind the landmarks.</p>
+        </div>
+      </div>
+      <div class="card" data-reveal>
+        <div class="card__body">
+          <div class="badge badge--hazard" style="margin-bottom:0.5rem;">Stay aware</div>
+          <h3 class="card__title">Live civic updates</h3>
+          <p class="text-muted" style="margin-top:0.5rem;">Announcements, safety alerts, and famous places — shared by the people around you.</p>
+        </div>
+      </div>
+      <div class="card" data-reveal>
+        <div class="card__body">
+          <div class="badge badge--event" style="margin-bottom:0.5rem;">Contribute</div>
+          <h3 class="card__title">Community-driven</h3>
+          <p class="text-muted" style="margin-top:0.5rem;">Report an event, recommend a place, flag a hazard — every contribution improves the grid for everyone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="fab" aria-label="Toggle dark mode" data-theme-toggle title="Toggle theme">🌓</button>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

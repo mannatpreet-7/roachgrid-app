@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore — RoachGrid</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  /* Marker pin styling — scoped here since it's specific to Leaflet's divIcon output */
+  .place-marker__pin {
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(45deg);
+    font-size: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .place-marker__pin > * { transform: rotate(-45deg); }
+</style>
+</head>
+<body class="page-explore">
+
+<nav class="nav">
+  <a href="index.html" class="nav__brand"><span class="nav__brand-mark">R</span> RoachGrid</a>
+  <ul class="nav__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="explore.html" aria-current="page">Explore</a></li>
+    <li><a href="culture.html">Culture</a></li>
+    <li><a href="updates.html">Updates</a></li>
+    <li><a href="profile.html">Profile</a></li>
+  </ul>
+  <button class="nav__menu-btn" data-menu-toggle aria-label="Menu">☰</button>
+</nav>
+
+<div class="explore">
+  <div class="explore__panel" id="explore-panel">
+    <div class="sheet-handle" id="sheet-handle"></div>
+
+    <div class="explore__controls">
+      <h2 style="font-size:var(--fs-xl);">Explore nearby</h2>
+
+      <div id="weather-widget" class="weather-widget" style="margin-top:0.75rem;">
+        <span class="weather-widget__icon weather-widget__icon--sun">☀️</span>
+        <div>
+          <div class="weather-widget__temp" id="weather-temp">—°</div>
+          <div class="weather-widget__meta" id="weather-meta">Loading weather…</div>
+        </div>
+        <div class="weather-widget__time" id="weather-time"></div>
+      </div>
+
+      <div class="location-search" style="margin-top:0.75rem;">
+        <input type="text" id="location-search-input" placeholder="Search a place, city, or address…" autocomplete="off">
+        <button type="button" class="btn btn--secondary btn--sm" id="location-search-btn">Search</button>
+        <button type="button" class="btn btn--secondary btn--sm" id="use-my-location-btn" title="Use my current location">📍</button>
+      </div>
+      <div id="location-search-results" class="location-search__results"></div>
+      <div class="text-muted" id="current-location-label" style="font-size:var(--fs-xs); margin-top:0.4rem;"></div>
+
+      <div class="radius-control">
+        <label for="radius-slider" class="text-muted" style="font-size:var(--fs-sm);flex-shrink:0;">Radius</label>
+        <input type="range" id="radius-slider" min="200" max="20000" step="200" value="1000">
+        <span class="radius-control__value" id="radius-value">1.0 km</span>
+      </div>
+
+      <div class="chip-row" id="category-chips" role="group" aria-label="Filter by category">
+        <button class="chip" data-category="restaurants" aria-pressed="true">🍽️ Restaurants</button>
+        <button class="chip" data-category="cafes" aria-pressed="true">☕ Cafés</button>
+        <button class="chip" data-category="street_food" aria-pressed="false">🥘 Street food</button>
+        <button class="chip" data-category="attractions" aria-pressed="false">🏛️ Attractions</button>
+        <button class="chip" data-category="hotels" aria-pressed="false">🛏️ Hotels</button>
+        <button class="chip" data-category="hospitals" aria-pressed="false">🏥 Hospitals</button>
+        <button class="chip" data-category="police" aria-pressed="false">🚓 Police</button>
+        <button class="chip" data-category="fire_station" aria-pressed="false">🚒 Fire station</button>
+        <button class="chip" data-category="ngo" aria-pressed="false">🤝 NGOs</button>
+        <button class="chip" data-category="banks_atms" aria-pressed="false">🏧 Banks/ATMs</button>
+        <button class="chip" data-category="parks" aria-pressed="false">🌳 Parks</button>
+        <button class="chip" data-category="worship" aria-pressed="false">🛕 Worship</button>
+        <button class="chip" data-category="schools" aria-pressed="false">🎓 Schools</button>
+        <button class="chip" data-category="transport" aria-pressed="false">🚉 Transport</button>
+      </div>
+    </div>
+
+    <div class="explore__panel-scroll">
+      <div id="results-list">
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="explore__map">
+    <div id="leaflet-map"></div>
+  </div>
+</div>
+
+<button class="fab" id="fab-contribute" aria-label="Contribute" title="Add a report or recommendation">+</button>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="contribute-modal">
+    <h3>Contribute to the grid</h3>
+    <p class="text-muted" style="margin-top:0.25rem;">Report an event, hazard, or recommend a place — this saves to your device.</p>
+    <form id="contribute-form" style="margin-top:1.25rem;">
+      <div class="form-field">
+        <label for="type">Type</label>
+        <select id="type" name="type" required>
+          <option value="event">Event</option>
+          <option value="hazard">Safety alert</option>
+          <option value="closure">Road closure</option>
+          <option value="gathering">Public gathering</option>
+          <option value="recommendation">Place recommendation</option>
+          <option value="culture">Cultural insight</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="e.g. Street closed near market" required>
+      </div>
+      <div class="form-field">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="e.g. Main Street">
+      </div>
+      <div class="form-field">
+        <label for="description">Details</label>
+        <textarea id="description" name="description" rows="3" placeholder="Add a bit more context…"></textarea>
+      </div>
+      <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+        <button type="submit" class="btn btn--primary">Submit</button>
+        <button type="button" class="btn btn--secondary" data-close-modal>Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="js/main.js"></script>
+<script type="module">
+  import { initMap, setCenter, renderMarkers, highlightMarker, fitToRadius } from "./js/modules/map.js";
+  import { initRadiusSelector } from "./js/modules/radiusSelector.js";
+  import { initContributeForm } from "./js/modules/contributeForm.js";
+  import { getCurrentPosition } from "./js/api/geolocation.js";
+  import { getNearbyPlaces, searchLocation, CATEGORY_ICONS, CATEGORY_LABELS } from "./js/api/places.js";
+  import { getWeather, getLocalTimeString, WEATHER_CODES } from "./js/api/weather.js";
+  import { createEl, showToast, debounce } from "./js/utils/dom.js";
+
+  let currentRadius = 1000;
+  let currentPos = { lat: 28.6139, lon: 77.2090 };
+  let currentTimezone = null;
+
+  function getActiveCategories() {
+    return Array.from(document.querySelectorAll(".chip[aria-pressed='true']")).map((c) => c.dataset.category);
+  }
+
+  function starString(rating) {
+    if (!rating) return "";
+    const full = Math.round(rating);
+    return "★".repeat(full) + "☆".repeat(5 - full);
+  }
+
+  function renderResults(places) {
+    const list = document.getElementById("results-list");
+    list.innerHTML = "";
+
+    if (places.length === 0) {
+      list.appendChild(createEl("p", { className: "text-muted", text: "Nothing found in this radius yet — try widening it or picking more categories." }));
+      return;
+    }
+
+    places.forEach((place) => {
+      const item = createEl("div", { className: "result-item", attrs: { tabindex: "0" } });
+
+      let visual;
+      if (place.photoUrl) {
+        visual = createEl("img", { className: "result-item__photo", attrs: { src: place.photoUrl, alt: place.name } });
+      } else {
+        visual = createEl("div", {
+          className: `result-item__icon badge--${["hospitals", "police", "fire_station"].includes(place.category) ? "hazard" : place.category === "attractions" ? "civic" : "food"}`,
+          text: CATEGORY_ICONS[place.category] || "📍",
+        });
+      }
+
+      const body = createEl("div", { className: "result-item__body" });
+      body.appendChild(createEl("div", { className: "result-item__title", text: place.name }));
+
+      const metaParts = [CATEGORY_LABELS[place.category] || "Place"];
+      if (place.address) metaParts.push(place.address);
+      body.appendChild(createEl("div", { className: "result-item__meta", text: metaParts.join(" · ") }));
+
+      if (place.rating) {
+        const ratingRow = createEl("div", { className: "result-item__rating" });
+        ratingRow.appendChild(createEl("span", { className: "result-item__stars", text: starString(place.rating) }));
+        ratingRow.appendChild(createEl("span", { className: "text-muted", text: ` ${place.rating.toFixed(1)}${place.reviewCount ? ` (${place.reviewCount})` : ""}` }));
+        body.appendChild(ratingRow);
+      }
+
+      item.append(visual, body);
+      item.addEventListener("click", () => highlightMarker(place.id));
+      list.appendChild(item);
+    });
+  }
+
+  async function loadWeather(lat, lon) {
+    try {
+      const w = await getWeather(lat, lon);
+      currentTimezone = w.timezone;
+      const meta = WEATHER_CODES[w.weatherCode] || { label: "—", icon: "sun" };
+      document.getElementById("weather-temp").textContent = `${Math.round(w.temperature)}°C`;
+      document.getElementById("weather-meta").textContent = `${meta.label} · humidity ${w.humidity}%`;
+      updateLocalTime();
+    } catch (err) {
+      document.getElementById("weather-meta").textContent = "Weather unavailable right now";
+      document.getElementById("weather-time").textContent = "";
+    }
+  }
+
+  function updateLocalTime() {
+    const timeEl = document.getElementById("weather-time");
+    const time = getLocalTimeString(currentTimezone);
+    timeEl.textContent = time ? `Local time ${time}` : "";
+  }
+
+  async function loadPlaces(lat, lon) {
+    const categories = getActiveCategories();
+    if (categories.length === 0) {
+      renderResults([]);
+      renderMarkers([]);
+      return;
+    }
+    document.getElementById("results-list").innerHTML =
+      '<div class="skeleton skeleton--card"></div><div class="skeleton skeleton--card"></div>';
+    try {
+      const places = await getNearbyPlaces(lat, lon, currentRadius, categories);
+      renderResults(places);
+      renderMarkers(places, { icons: CATEGORY_ICONS, onMarkerClick: (p) => highlightMarker(p.id) });
+    } catch (err) {
+      showToast("Couldn't load nearby places — check your connection.", "error");
+      renderResults([]);
+    }
+  }
+
+  function goToPosition(lat, lon, label) {
+    currentPos = { lat, lon };
+    setCenter(lat, lon);
+    loadWeather(lat, lon);
+    loadPlaces(lat, lon);
+    fitToRadius();
+    document.getElementById("current-location-label").textContent = label ? `Showing: ${label}` : "";
+  }
+
+  function renderSearchResults(results) {
+    const box = document.getElementById("location-search-results");
+    box.innerHTML = "";
+    if (results.length === 0) return;
+
+    results.forEach((r) => {
+      const item = createEl("button", { className: "location-search__result", text: r.label, attrs: { type: "button" } });
+      item.addEventListener("click", () => {
+        goToPosition(r.lat, r.lon, r.label.split(",").slice(0, 2).join(","));
+        box.innerHTML = "";
+        document.getElementById("location-search-input").value = r.label.split(",")[0];
+      });
+      box.appendChild(item);
+    });
+  }
+
+  function initLocationSearch() {
+    const input = document.getElementById("location-search-input");
+    const searchBtn = document.getElementById("location-search-btn");
+    const useLocationBtn = document.getElementById("use-my-location-btn");
+
+    async function runSearch() {
+      const query = input.value.trim();
+      if (query.length < 2) return;
+      try {
+        const results = await searchLocation(query);
+        renderSearchResults(results);
+        if (results.length === 0) showToast("No matching location found.", "info");
+      } catch {
+        showToast("Location search failed — check your connection.", "error");
+      }
+    }
+
+    searchBtn.addEventListener("click", runSearch);
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") runSearch(); });
+    input.addEventListener("input", debounce(() => {
+      if (input.value.trim().length >= 3) runSearch();
+    }, 500));
+
+    useLocationBtn.addEventListener("click", async () => {
+      useLocationBtn.disabled = true;
+      const pos = await getCurrentPosition();
+      goToPosition(pos.lat, pos.lon, "Your current location");
+      document.getElementById("location-search-results").innerHTML = "";
+      input.value = "";
+      useLocationBtn.disabled = false;
+    });
+  }
+
+  (async function boot() {
+    const pos = await getCurrentPosition();
+    currentPos = pos;
+    initMap("leaflet-map", pos);
+    fitToRadius();
+    loadWeather(pos.lat, pos.lon);
+
+    initRadiusSelector({
+      sliderEl: document.getElementById("radius-slider"),
+      valueEl: document.getElementById("radius-value"),
+      onChange: (meters) => {
+        currentRadius = meters;
+        loadPlaces(currentPos.lat, currentPos.lon);
+        fitToRadius();
+      },
+    });
+
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const pressed = chip.getAttribute("aria-pressed") === "true";
+        chip.setAttribute("aria-pressed", String(!pressed));
+        loadPlaces(currentPos.lat, currentPos.lon);
+      });
+    });
+
+    initLocationSearch();
+    loadPlaces(pos.lat, pos.lon);
+
+    // Refresh the displayed local time every 30s without re-fetching weather
+    setInterval(updateLocalTime, 30000);
+
+    // Mobile bottom-sheet drag-to-expand (tap handle as a simple toggle;
+    // full pointer-drag physics can be layered on top of this later)
+    const panel = document.getElementById("explore-panel");
+    const handle = document.getElementById("sheet-handle");
+    handle.addEventListener("click", () => panel.classList.toggle("is-expanded"));
+
+    initContributeForm({
+      fabEl: document.getElementById("fab-contribute"),
+      overlayEl: document.getElementById("modal-overlay"),
+      modalEl: document.getElementById("contribute-modal"),
+      formEl: document.getElementById("contribute-form"),
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{
+  "language": {
+    "intro": "This region is multilingual — most people move between two or three of these depending on who they're talking to. Tap a language below to see its everyday phrases.",
+    "phrasesIntro": "A handful of local phrases go a long way — here are the essentials.",
+    "spoken": [
+      {
+        "name": "Hindi",
+        "role": "Widely spoken / lingua franca",
+        "note": "Understood almost everywhere; safest default for signage and basic conversation.",
+        "phrases": [
+          { "phrase": "Hello", "local": "Namaste", "pronunciation": "nuh-mas-tay" },
+          { "phrase": "Thank you", "local": "Dhanyavaad", "pronunciation": "dun-yuh-vaad" },
+          { "phrase": "How much?", "local": "Kitna hai?", "pronunciation": "kit-na hai" },
+          { "phrase": "Where is...?", "local": "...kahan hai?", "pronunciation": "kuh-haan hai" }
+        ]
+      },
+      {
+        "name": "Punjabi",
+        "role": "Regional / local language",
+        "note": "The everyday language in homes, markets, and local media across this region.",
+        "phrases": [
+          { "phrase": "Hello", "local": "Sat Sri Akal", "pronunciation": "sut-sree-uh-kaal" },
+          { "phrase": "Thank you", "local": "Dhanvaad", "pronunciation": "dun-vaad" },
+          { "phrase": "How much is this?", "local": "Eh kinna hai?", "pronunciation": "eh kin-na hai" },
+          { "phrase": "Where is...?", "local": "...kithe hai?", "pronunciation": "kith-thay hai" }
+        ]
+      },
+      {
+        "name": "English",
+        "role": "Official / business language",
+        "note": "Common in official signage, businesses, and with younger people in urban areas — usually blended with local words in casual speech.",
+        "phrases": [
+          { "phrase": "Okay / got it", "local": "Achha", "pronunciation": "uh-cha" },
+          { "phrase": "It's fine / that works", "local": "Theek hai", "pronunciation": "teek hai" },
+          { "phrase": "What's the rate/price?", "local": "What's the rate?", "pronunciation": "same as written" },
+          { "phrase": "Friend (casual address)", "local": "Yaar", "pronunciation": "yaar" }
+        ]
+      }
+    ]
+  },
+  "festivals": {
+    "intro": "Festivals shape the rhythm of local life — plan around them, or better, join in.",
+    "items": [
+      { "name": "Diwali", "season": "Autumn", "description": "Festival of lights, marked by lamps, fireworks and family gatherings." },
+      { "name": "Holi", "season": "Spring", "description": "The color festival — streets fill with color powder and music." },
+      { "name": "Local Harvest Fair", "season": "Winter", "description": "A community celebration of the season's harvest with food stalls and folk performances." }
+    ]
+  },
+  "lifestyle": {
+    "intro": "How locals actually spend their day.",
+    "notes": [
+      "Mornings often start early with tea/coffee at a neighborhood stall.",
+      "Markets are busiest in the early evening after the day's heat eases.",
+      "Most shops close for a short afternoon break in smaller neighborhoods."
+    ]
+  }
+}
