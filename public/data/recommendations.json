@@ -1,0 +1,14 @@
+{
+ "checkedOn":"2026-10-25",
+ "note":"Editorial suggestions cross-checked against official district/tourism pages. Coordinates identify the city/area only, NOT exact entrances; no opening hours, ratings or live availability are claimed.",
+ "items":[
+  {"id":"ambala-panjokhra","name":"Panjokhra Sahib Gurudwara","city":"Ambala","area":{"lat":30.378,"lon":76.78},"description":"A district-listed place of interest. Check visitor etiquette and current access before visiting.","source":"https://ambala.gov.in/tourist-place/panjokhra-sahib-gurudwara/"},
+  {"id":"ambala-ambika","name":"Ambika Mata Temple","city":"Ambala","area":{"lat":30.378,"lon":76.78},"description":"A place of interest listed by the Ambala district administration.","source":"https://ambala.gov.in/tourist-places/"},
+  {"id":"ambala-manji","name":"Manji Sahib Gurudwara","city":"Ambala","area":{"lat":30.378,"lon":76.78},"description":"A district-listed religious place in Ambala city.","source":"https://ambala.gov.in/tourist-places/"},
+  {"id":"chd-rock","name":"Rock Garden","city":"Chandigarh","area":{"lat":30.735,"lon":76.79},"description":"A sculpture garden featured by Chandigarh Tourism. Consult the official page for current entry information.","source":"https://chandigarhtourism.gov.in/pages/page/rock-garden"},
+  {"id":"chd-rose","name":"Zakir Hussain Rose Garden","city":"Chandigarh","area":{"lat":30.735,"lon":76.79},"description":"A garden featured by Chandigarh Tourism.","source":"https://chandigarhtourism.gov.in/gardens/rose"},
+  {"id":"sri-nishat","name":"Nishat Garden","city":"Srinagar","area":{"lat":34.084,"lon":74.797},"description":"A Mughal garden featured by Srinagar district tourism.","source":"https://srinagar.nic.in/tourist-place/nishat-garden/"},
+  {"id":"sri-dal","name":"Dal Lake","city":"Srinagar","area":{"lat":34.084,"lon":74.797},"description":"A lakeside destination featured by Srinagar district tourism. Confirm access and safe activities locally.","source":"https://srinagar.nic.in/tourist-place/dal-lake/"},
+  {"id":"sri-shalimar","name":"Shalimar Garden","city":"Srinagar","area":{"lat":34.084,"lon":74.797},"description":"A garden featured by Srinagar district tourism.","source":"https://srinagar.nic.in/tourist-place/shalimar-garden/"}
+ ]
+}
