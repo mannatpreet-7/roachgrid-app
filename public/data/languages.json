@@ -1,0 +1,194 @@
+{
+  "spoken": [
+    {
+      "name": "Kannada",
+      "code": "kn",
+      "role": "Karnataka",
+      "source": "https://en.wikivoyage.org/wiki/Kannada_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello",
+          "local": "Namaskara",
+          "script": "ನಮಸ್ಕಾರ",
+          "pronunciation": "Namaskara (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Kannada_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Kannada_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Dhanyavadagalu",
+          "script": "ಧನ್ಯವಾದಗಳು",
+          "pronunciation": "Dhanyavadagalu (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Kannada_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    },
+    {
+      "name": "Gujarati",
+      "code": "gu",
+      "role": "Gujarat",
+      "source": "https://en.wikivoyage.org/wiki/Gujarati_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello",
+          "local": "Namaste",
+          "script": "નમસ્તે",
+          "pronunciation": "Namaste (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Gujarati_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Gujarati_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Aabhar",
+          "script": "આભાર",
+          "pronunciation": "Aabhar (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Gujarati_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    },
+    {
+      "name": "Marathi",
+      "code": "mr",
+      "role": "Maharashtra",
+      "source": "https://en.wikivoyage.org/wiki/Marathi_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello",
+          "local": "Namaskar",
+          "script": "नमस्कार",
+          "pronunciation": "Namaskar (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Marathi_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Marathi_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Dhanyavaad",
+          "script": "धन्यवाद",
+          "pronunciation": "Dhanyavaad (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Marathi_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    },
+    {
+      "name": "Malayalam",
+      "code": "ml",
+      "role": "Kerala",
+      "source": "https://en.wikivoyage.org/wiki/Malayalam_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello (formal)",
+          "local": "Namaskaram",
+          "script": "നമസ്കാരം",
+          "pronunciation": "Namaskaram (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Malayalam_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Malayalam_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Nanni",
+          "script": "നന്ദി",
+          "pronunciation": "Nanni (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Malayalam_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    },
+    {
+      "name": "Odia",
+      "code": "or",
+      "role": "Odisha",
+      "source": "https://en.wikivoyage.org/wiki/Odia_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello",
+          "local": "Namaskar",
+          "script": "ନମସ୍କାର",
+          "pronunciation": "Namaskar (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Odia_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Odia_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Dhanyabad",
+          "script": "ଧନ୍ୟବାଦ",
+          "pronunciation": "Dhanyabad (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Odia_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    },
+    {
+      "name": "Telugu",
+      "code": "te",
+      "role": "Andhra Pradesh / Telangana",
+      "source": "https://en.wikivoyage.org/wiki/Telugu_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello (formal)",
+          "local": "Namaskaram",
+          "script": "నమస్కారం",
+          "pronunciation": "Namaskaram (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Telugu_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Telugu_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Dhanyavadalu",
+          "script": "ధన్యవాదాలు",
+          "pronunciation": "Dhanyavadalu (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Telugu_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    },
+    {
+      "name": "Tamil",
+      "code": "ta",
+      "role": "Tamil Nadu",
+      "source": "https://en.wikivoyage.org/wiki/Tamil_phrasebook",
+      "license": "Short phrases cross-checked against Wikivoyage contributors (CC BY-SA) and linked references; romanization is approximate.",
+      "phrases": [
+        {
+          "phrase": "Hello",
+          "local": "Vanakkam",
+          "script": "வணக்கம்",
+          "pronunciation": "Vanakkam (approximate romanization)",
+          "category": "greetings",
+          "source": "https://en.wikivoyage.org/wiki/Tamil_phrasebook",
+          "crossCheck": "https://en.wikivoyage.org/wiki/Tamil_phrasebook"
+        },
+        {
+          "phrase": "Thank you",
+          "local": "Nandri",
+          "script": "நன்றி",
+          "pronunciation": "Nandri (approximate romanization)",
+          "category": "courtesy",
+          "source": "https://en.wikivoyage.org/wiki/Tamil_phrasebook",
+          "crossCheck": "https://www.indilingo.ai/blog/how-to-say-thank-you-in-indian-languages"
+        }
+      ]
+    }
+  ],
+  "note": "Odia is also historically called Oriya. Two basic phrases per additional language; not a complete language course."
+}

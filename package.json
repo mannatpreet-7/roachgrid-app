@@ -1,0 +1,35 @@
+{
+  "name": "roachgrid-react",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:live": "node tests/live-audit.cjs",
+    "format": "prettier --write src tests *.js *.html",
+    "format:check": "prettier --check src tests *.js *.html",
+    "build:live-server": "node scripts/build-live-server.mjs"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.52.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "prettier": "^3.9.10",
+    "vite": "^6.3.5",
+    "vitest": "^4.1.12"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

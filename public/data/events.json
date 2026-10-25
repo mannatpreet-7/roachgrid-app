@@ -1,0 +1,8 @@
+{
+  "checkedOn":"2026-10-25",
+  "note":"Sourced editorial snapshot, not a live events feed. Dates can change; confirm with organizer. Coverage is limited, not exhaustive.",
+  "items":[
+    {"id":"cii-chd-2026","title":"CII Chandigarh Fair — 29th edition","startsOn":"2026-10-30","endsOn":"2026-11-02","city":"Chandigarh","venue":"Parade Ground, Sector 17","lat":30.739,"lon":76.781,"description":"Sourced event listing; confirm visitor timings, entry and current status with the organizer.","source":"https://chdlife.com/events-in-chandigarh/","organizerUrl":"https://www.facebook.com/CIIChandigarhFair/","sourceLabel":"Chandigarh Life / CII organizer listing"},
+    {"id":"chd-international-marathon-2026","title":"Chandigarh International Marathon — 2nd edition","startsOn":"2026-11-21","endsOn":"2026-11-21","city":"Chandigarh","venue":"Chandigarh (see organizer for start venue)","lat":30.758,"lon":76.803,"description":"Organizer website currently lists 21 November; some earlier reports listed 22 November. Confirm date, registration and start venue directly before making plans.","source":"https://chdmarathon.chd.gov.in/","organizerUrl":"https://chdmarathon.chd.gov.in/","sourceLabel":"Official Chandigarh Administration event website"}
+  ]
+}
